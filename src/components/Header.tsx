@@ -39,12 +39,12 @@ export default function Header() {
           </div>
           <div className="flex flex-col">
             <span
-              className={`font-black text-xl leading-none ${scrolled ? "text-main" : "text-white"}`}
+              className={`font-black text-xl leading-none ${scrolled ? "text-main" : "text-slate-600"}`}
             >
               RAVINALA
             </span>
             <span
-              className={`text-[10px] tracking-[3px] font-bold ${scrolled ? "text-slate-500" : "text-slate-200"}`}
+              className={`text-[10px] tracking-[3px] font-bold ${scrolled ? "text-slate-500" : "text-slate-400"}`}
             >
               LANDSCAPE
             </span>
@@ -58,7 +58,7 @@ export default function Header() {
               key={link.name}
               href={link.href}
               className={`font-bold hover:text-accent transition-colors ${
-                scrolled ? "text-slate-700" : "text-white"
+                scrolled ? "text-slate-700" : "text-slate-500"
               }`}
             >
               {link.name}
