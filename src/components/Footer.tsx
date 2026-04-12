@@ -109,9 +109,7 @@ export default function Footer() {
             <h4 className="text-lg font-black mb-6 border-r-4 border-accent pr-3">
               تواصل معنا
             </h4>
-            <p className="text-slate-300 text-sm mb-4">
-              الرياض، المملكة العربية السعودية
-            </p>
+            <p className="text-slate-300 text-sm mb-4">القاهرة، مصر</p>
             <p className="text-white font-black text-lg mb-6">
               info@ravinala.com
             </p>
@@ -129,17 +127,8 @@ export default function Footer() {
         </div>
 
         {/* سطر الحقوق السفلي */}
-        <div className="border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-400 font-medium">
-          <p>© 2026 Ravinala Landscape. جميع الحقوق محفوظة.</p>
-          <div className="flex items-center gap-1">
-            <span>تم التطوير بكل</span>
-            <Heart
-              size={16}
-              className="text-rose-500 fill-rose-500 animate-pulse"
-            />
-            <span>بواسطة</span>
-            <span className="text-white font-black ml-1">Ebda Baswal Team</span>
-          </div>
+        <div className="border-t border-white/10 pt-10 flex flex-col md:flex-row justify-center items-center gap-6 text-sm text-slate-400 font-medium">
+          <p> رافينالا لاندسكيب © 2026 جميع الحقوق محفوظة. </p>
         </div>
       </div>
     </footer>

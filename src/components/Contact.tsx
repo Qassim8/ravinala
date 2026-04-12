@@ -96,8 +96,8 @@ export default function ContactSection() {
                 },
                 {
                   icon: <MapPin size={22} />,
-                  label: "المقر",
-                  val: "الرياض، المملكة العربية السعودية",
+                  label: "الموقع",
+                  val: "القاهرة، مصر",
                   link: "#",
                 },
               ].map((item, i) => (
@@ -121,7 +121,7 @@ export default function ContactSection() {
           </div>
 
           {/* 2. الفورم (الجانب الأيسر) */}
-          <div className="lg:w-2/3 w-full" data-aos="fade-right">
+          <div className="" data-aos="fade-right">
             <div className="bg-stone-50 p-8 md:p-12 rounded-[3rem] border border-slate-100 shadow-sm">
               <form
                 onSubmit={handleSubmit}
@@ -160,7 +160,7 @@ export default function ContactSection() {
                   />
                 </div>
 
-                <div className="md:col-span-2 space-y-2">
+                <div className=" space-y-2">
                   <label className="text-sm font-black text-main mr-2 flex items-center gap-2">
                     <MessageDots size={16} /> تفاصيل المشروع أو الاستفسار
                   </label>

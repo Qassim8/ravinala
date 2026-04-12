@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Tajawal } from "next/font/google";
 import "./globals.css";
 import Header from "../src/components/Header";
 import Footer from "@/src/components/Footer";
@@ -12,6 +12,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const tajwal = Tajawal({
+  variable: "--font-tajawal",
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +34,7 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased bg-stone-50`}
+      className={`${geistSans.variable} ${geistMono.variable} ${tajwal.variable} h-full antialiased bg-stone-50`}
     >
       <Header />
       <body className="min-h-full flex flex-col">{children}</body>

@@ -4,5 +4,8 @@
   --color-main: #054a49;
   --color-main-light: #055c54;
   --color-accent: #f4b400; /* أصفر ذهبي خفيف يناسب الزرع والخشب */
-  --font-heading: "Cairo", sans-serif;
+  --font-heading: var(--font-tajawal), sans-serif;
+}
+body {
+  font-family: var(--font-heading), sans-serif;
 }

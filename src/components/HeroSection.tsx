@@ -18,27 +18,17 @@ export default function Hero() {
   return (
     <section className="relative h-screen py-20 flex items-center justify-center text-white overflow-hidden">
       {/* 1. حاوية الخلفية (فيديو أو صورة) مع Overlay غامق */}
+      <div className="absolute top-0 left-0 w-full h-full bg-white/95 z-20"></div>
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover brightness-[0.4]" //brightness غامق لجعل النص مقروءاً
-          poster="/images/hero-bg-poster.jpg" // صورة تظهر قبل تحميل الفيديو
-        >
-          {/* يمكنك استبدال الرابط بفيديو خاص بك */}
-          <source
-            src="https://player.vimeo.com/external/498418659.sd.mp4?s=f4b32111818d6e355f3248356784d5a9d8212e69&profile_id=164&oauth2_token_id=57447761"
-            type="video/mp4"
-          />
-          {/* إذا أردت استخدام صورة بدلاً من الفيديو، امسح تاغ الـ video واستخدم هذا: */}
-          {/* <img src="/images/hero-landscape.jpg" className="w-full h-full object-cover brightness-50" /> */}
-        </video>
+        <img
+          src="/hero-background.png"
+          alt="Hero Background"
+          className="w-full h-full object-cover "
+        />
       </div>
 
       {/* 2. حاوية المحتوى الرئيسي */}
-      <div className="container mx-auto px-5 relative z-10 text-center">
+      <div className="container mx-auto px-5 z-30 text-center">
         {/* شارة علوية بسيطة */}
         <div
           data-aos="fade-down"
