@@ -1,4 +1,5 @@
 "use client";
+import React, { useState, useEffect, FormEvent } from "react";
 import {
   Phone,
   Mail,
@@ -9,12 +10,20 @@ import {
   User,
   MessageDots,
   CircleCheck,
+  Icon, // استيراد نوع الأيقونات إذا احتجت تعريفها يدوياً
 } from "tabler-icons-react";
-import { useState, useEffect } from "react";
+
+// تعريف واجهة البيانات لمعلومات التواصل
+interface ContactInfo {
+  icon: React.ReactNode;
+  label: string;
+  val: string;
+  link: string;
+}
 
 export default function ContactSection() {
-  const [success, setSuccess] = useState(false);
-  const [load, setLoad] = useState(false);
+  const [success, setSuccess] = useState<boolean>(false);
+  const [load, setLoad] = useState<boolean>(false);
 
   // إخفاء رسالة النجاح تلقائياً
   useEffect(() => {
@@ -24,29 +33,64 @@ export default function ContactSection() {
     }
   }, [success]);
 
-  async function handleSubmit(e) {
+  // تحديد نوع الحدث كـ FormEvent من عنصر HTMLFormElement
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formData = new FormData(e.target);
+
+    // تأكيد النوع للوصول لـ reset()
+    const target = e.target as HTMLFormElement;
+    const formData = new FormData(target);
+
     try {
       setLoad(true);
       const response = await fetch(
-        "https://formsubmit.co/ajax/mohamedalgasim123@gmail.com", // استخدام AJAX لضمان الوصول
+        "https://formsubmit.co/ajax/mohamedalgasim123@gmail.com",
         {
           method: "POST",
-          headers: { Accept: "application/json" },
+          headers: {
+            Accept: "application/json",
+          },
           body: formData,
         },
       );
+
       if (response.ok) {
-        e.target.reset();
+        target.reset();
         setSuccess(true);
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error submitting form:", error);
     } finally {
       setLoad(false);
     }
   }
+
+  const contactList: ContactInfo[] = [
+    {
+      icon: <Phone size={22} />,
+      label: "اتصل بنا",
+      val: "+966 50 000 0000",
+      link: "tel:+966500000000",
+    },
+    {
+      icon: <BrandWhatsapp size={22} />,
+      label: "واتساب",
+      val: "مراسلة فورية",
+      link: "https://wa.me/966500000000",
+    },
+    {
+      icon: <Mail size={22} />,
+      label: "الإيميل",
+      val: "info@ravinala.com",
+      link: "mailto:info@ravinala.com",
+    },
+    {
+      icon: <MapPin size={22} />,
+      label: "الموقع",
+      val: "القاهرة، مصر",
+      link: "#",
+    },
+  ];
 
   return (
     <section id="contact" className="py-24 bg-white relative overflow-hidden">
@@ -60,7 +104,7 @@ export default function ContactSection() {
 
       <div className="container mx-auto px-5 relative z-10">
         <div className="flex flex-col lg:flex-row gap-16 items-start">
-          {/* 1. معلومات التواصل (الجانب الأيمن) */}
+          {/* 1. معلومات التواصل */}
           <div className="lg:w-1/3" data-aos="fade-left">
             <div className="inline-block px-4 py-1.5 bg-main/5 rounded-full text-main font-bold text-sm mb-6">
               تواصل معنا
@@ -75,32 +119,7 @@ export default function ContactSection() {
             </p>
 
             <div className="space-y-4">
-              {[
-                {
-                  icon: <Phone size={22} />,
-                  label: "اتصل بنا",
-                  val: "+966 50 000 0000",
-                  link: "tel:+966500000000",
-                },
-                {
-                  icon: <BrandWhatsapp size={22} />,
-                  label: "واتساب",
-                  val: "مراسلة فورية",
-                  link: "https://wa.me/966500000000",
-                },
-                {
-                  icon: <Mail size={22} />,
-                  label: "الإيميل",
-                  val: "info@ravinala.com",
-                  link: "mailto:info@ravinala.com",
-                },
-                {
-                  icon: <MapPin size={22} />,
-                  label: "الموقع",
-                  val: "القاهرة، مصر",
-                  link: "#",
-                },
-              ].map((item, i) => (
+              {contactList.map((item, i) => (
                 <a
                   key={i}
                   href={item.link}
@@ -120,8 +139,8 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* 2. الفورم (الجانب الأيسر) */}
-          <div className="" data-aos="fade-right">
+          {/* 2. الفورم */}
+          <div className="lg:w-2/3 w-full" data-aos="fade-right">
             <div className="bg-stone-50 p-8 md:p-12 rounded-[3rem] border border-slate-100 shadow-sm">
               <form
                 onSubmit={handleSubmit}
@@ -160,15 +179,15 @@ export default function ContactSection() {
                   />
                 </div>
 
-                <div className=" space-y-2">
+                <div className="md:col-span-2 space-y-2">
                   <label className="text-sm font-black text-main mr-2 flex items-center gap-2">
                     <MessageDots size={16} /> تفاصيل المشروع أو الاستفسار
                   </label>
                   <textarea
                     name="message"
                     required
-                    rows="4"
-                    placeholder="اكتب لنا نبذة عن المساحة التي ترغب في تصميمها أو صيانتها..."
+                    rows={4}
+                    placeholder="اكتب لنا نبذة عن المساحة..."
                     className="form-input-custom resize-none"
                   ></textarea>
                 </div>
@@ -177,7 +196,9 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={load}
-                    className={`w-full bg-main hover:bg-main-light text-white py-5 rounded-2xl font-black text-lg shadow-xl shadow-main/10 transition-all flex items-center justify-center gap-3 group ${load ? "opacity-70 cursor-not-allowed" : "cursor-pointer"}`}
+                    className={`w-full bg-main hover:bg-main-light text-white py-5 rounded-2xl font-black text-lg shadow-xl shadow-main/10 transition-all flex items-center justify-center gap-3 group ${
+                      load ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
+                    }`}
                   >
                     {load ? "جاري الإرسال..." : "إرسال الطلب الآن"}
                     {!load && (
@@ -206,7 +227,7 @@ export default function ContactSection() {
           font-weight: 500;
         }
         .form-input-custom:focus {
-          border-color: var(--color-main);
+          border-color: #054a49; /* يمكنك استبدالها بـ var(--color-main) إذا كنت معرفها في CSS */
           box-shadow: 0 0 0 4px rgba(5, 74, 73, 0.05);
           transform: translateY(-2px);
         }
