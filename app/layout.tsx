@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Tajawal } from "next/font/google";
 import "./globals.css";
 import Header from "../src/components/Header";
 import Footer from "@/src/components/Footer";
+import AOSInit from "@/src/components/AOSInit";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
       dir="rtl"
       className={`${geistSans.variable} ${geistMono.variable} ${tajwal.variable} h-full antialiased bg-stone-50`}
     >
+      <AOSInit />
       <Header />
       <body className="min-h-full flex flex-col">{children}</body>
       <Footer />
