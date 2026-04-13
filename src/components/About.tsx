@@ -1,5 +1,5 @@
 "use client";
-import { Check } from "tabler-icons-react";
+import { Check, Plant2 } from "tabler-icons-react";
 
 export default function AboutSection() {
   const values = [
@@ -10,7 +10,14 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-20 overflow-hidden">
+    <section id="about" className="py-20 overflow-hidden relative">
+      <div
+        className="absolute -right-20 top-10 text-main pointer-events-none rotate-15 z-0"
+        data-aos="fade-left" // أنيميشن ناعم عند الظهور
+        data-aos-delay="200"
+      >
+        <Plant2 size={500} strokeWidth={1} className="opacity-5" />
+      </div>
       <div className="container mx-auto px-5">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* الجانب الأيمن: الصور */}

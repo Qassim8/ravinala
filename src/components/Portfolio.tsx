@@ -1,5 +1,5 @@
 "use client";
-import { ExternalLink, Search } from "tabler-icons-react";
+import { ExternalLink, Plant2, Search } from "tabler-icons-react";
 
 export default function Portfolio() {
   const projects = [
@@ -34,7 +34,17 @@ export default function Portfolio() {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-stone-50">
+    <section
+      id="projects"
+      className="py-20 bg-stone-50 relative overflow-hidden"
+    >
+      <div
+        className="absolute -right-20 top-32 text-main pointer-events-none rotate-15 z-0"
+        data-aos="fade-left" // أنيميشن ناعم عند الظهور
+        data-aos-delay="200"
+      >
+        <Plant2 size={500} strokeWidth={1} className="opacity-5" />
+      </div>
       <div className="container mx-auto px-5">
         {/* رأس السكشن */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">

@@ -6,6 +6,7 @@ import {
   Fence,
   Leaf,
   ArrowUpRight,
+  Plant2,
 } from "tabler-icons-react";
 
 export default function Services() {
@@ -41,7 +42,15 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-20 bg-white relative">
+    <section id="services" className="py-20 bg-white relative overflow-hidden">
+      <div
+        className="absolute -left-30 top-20 text-main pointer-events-none -rotate-20 z-0"
+        data-aos="fade-right" // أنيميشن ناعم عند الظهور
+        data-aos-delay="200"
+      >
+        <Plant2 size={500} strokeWidth={1} className="opacity-5" />
+      </div>
+
       <div className="container mx-auto px-5">
         {/* رأس السكشن */}
         <div className="text-center max-w-3xl mx-auto mb-16">
