@@ -24,7 +24,7 @@ export default function Header() {
   ];
 
   return (
-    <header
+    <nav
       className={`fixed top-0 w-full z-100 transition-all duration-300 ${
         scrolled
           ? "bg-white/80 backdrop-blur-md shadow-lg py-3"
@@ -111,6 +111,6 @@ export default function Header() {
           </Link>
         </div>
       </div>
-    </header>
+    </nav>
   );
 }

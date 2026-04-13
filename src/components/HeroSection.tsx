@@ -43,18 +43,23 @@ export default function Hero() {
         <h1
           data-aos="fade-up"
           data-aos-delay="400"
-          className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-8 text-slate-600"
+          className="flex flex-col gap-5 text-3xl md:text-7xl lg:text-8xl font-black leading-tight mb-8 text-slate-600"
         >
-          نصمم{" "}
-          <span className="text-accent underline underline-offset-8 decoration-wavy decoration-white/40">
-            جنة
-          </span>{" "}
-          أرضية
-          <br />
-          بلمسة هندسية{" "}
-          <span className="text-main-light bg-white px-3 py-1 rounded-3xl">
-            مبتكرة
-          </span>
+          <p>
+            {" "}
+            نصمم{" "}
+            <span className="text-accent underline underline-offset-8 decoration-wavy decoration-main/40 pb-3.5">
+              جنة
+            </span>{" "}
+            أرضية
+          </p>
+          <p>
+            {" "}
+            بلمسة هندسية{" "}
+            <span className="text-main-light bg-accent/10 px-3 py-1 rounded-3xl mt-5">
+              مبتكرة
+            </span>
+          </p>
         </h1>
 
         {/* الوصف الفرعي (Subtitle) */}

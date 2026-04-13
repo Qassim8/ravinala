@@ -5,15 +5,12 @@ import {
   Mail,
   MapPin,
   BrandWhatsapp,
-  Clock,
   Send,
   User,
   MessageDots,
   CircleCheck,
-  Icon, // استيراد نوع الأيقونات إذا احتجت تعريفها يدوياً
 } from "tabler-icons-react";
 
-// تعريف واجهة البيانات لمعلومات التواصل
 interface ContactInfo {
   icon: React.ReactNode;
   label: string;
@@ -25,7 +22,6 @@ export default function ContactSection() {
   const [success, setSuccess] = useState<boolean>(false);
   const [load, setLoad] = useState<boolean>(false);
 
-  // إخفاء رسالة النجاح تلقائياً
   useEffect(() => {
     if (success) {
       const timer = setTimeout(() => setSuccess(false), 5000);
@@ -33,11 +29,8 @@ export default function ContactSection() {
     }
   }, [success]);
 
-  // تحديد نوع الحدث كـ FormEvent من عنصر HTMLFormElement
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    // تأكيد النوع للوصول لـ reset()
     const target = e.target as HTMLFormElement;
     const formData = new FormData(target);
 
@@ -47,9 +40,7 @@ export default function ContactSection() {
         "https://formsubmit.co/ajax/mohamedalgasim123@gmail.com",
         {
           method: "POST",
-          headers: {
-            Accept: "application/json",
-          },
+          headers: { Accept: "application/json" },
           body: formData,
         },
       );
@@ -87,108 +78,127 @@ export default function ContactSection() {
     {
       icon: <MapPin size={22} />,
       label: "الموقع",
-      val: "القاهرة، مصر",
+      val: "الرياض، المملكة العربية السعودية",
       link: "#",
     },
   ];
 
   return (
-    <section id="contact" className="py-24 bg-white relative overflow-hidden">
-      {/* رسالة النجاح العائمة */}
+    <section
+      id="contact"
+      className="py-24 bg-stone-50/50 relative overflow-hidden"
+    >
+      {/* خلفية جمالية خفيفة */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
+        <img
+          src="/hero-background.png"
+          alt=""
+          className="w-full h-full object-cover grayscale"
+        />
+      </div>
+
+      {/* رسالة النجاح */}
       {success && (
-        <div className="fixed top-24 left-1/2 -translate-x-1/2 bg-green-600 text-white py-4 px-8 rounded-2xl shadow-2xl flex items-center gap-3 z-[9999] animate-bounce">
-          <CircleCheck size={24} />
-          <span className="font-bold text-lg">تم إرسال رسالتك بنجاح!</span>
+        <div className="fixed top-10 left-1/2 -translate-x-1/2 bg-main text-white py-4 px-10 rounded-full shadow-2xl flex items-center gap-3 z-[100] animate-in fade-in slide-in-from-top-5 duration-500">
+          <CircleCheck size={24} className="text-accent" />
+          <span className="font-bold">
+            تم إرسال رسالتك بنجاح! سنقوم بالرد قريباً.
+          </span>
         </div>
       )}
 
       <div className="container mx-auto px-5 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16 items-start">
-          {/* 1. معلومات التواصل */}
-          <div className="lg:w-1/3" data-aos="fade-left">
-            <div className="inline-block px-4 py-1.5 bg-main/5 rounded-full text-main font-bold text-sm mb-6">
-              تواصل معنا
-            </div>
-            <h2 className="text-4xl font-black text-main mb-6 leading-tight">
-              لنبدأ بتحويل <span className="text-main-light">مساحتك</span> إلى
-              واقع حي
-            </h2>
-            <p className="text-slate-500 mb-10 leading-relaxed font-medium">
-              فريقنا الهندسي جاهز للإجابة على استفساراتكم وتحديد موعد للمعاينة
-              الميدانية.
-            </p>
+        {/* العناوين */}
+        <div className="max-w-3xl mb-16" data-aos="fade-up">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-main text-white rounded-full text-xs font-bold mb-6 tracking-widest uppercase">
+            <span className="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+            تواصل معنا الآن
+          </div>
+          <h2 className="text-4xl md:text-5xl font-black text-main mb-6 leading-[1.2]">
+            لنصنع معاً <span className="text-main-light italic">مشروعاً</span>{" "}
+            ينبض بالحياة
+          </h2>
+          <p className="text-slate-500 text-lg font-medium leading-relaxed">
+            فريق Ravinala جاهز لتحويل رؤيتك إلى واقع هندسي. سواء كانت استشارة
+            سريعة أو مشروعاً متكاملاً، نحن هنا لنسمع منك.
+          </p>
+        </div>
 
-            <div className="space-y-4">
-              {contactList.map((item, i) => (
-                <a
-                  key={i}
-                  href={item.link}
-                  className="flex items-center gap-4 p-5 rounded-3xl border border-slate-100 hover:border-main/20 hover:bg-stone-50 transition-all group"
-                >
-                  <div className="bg-white shadow-sm p-3 rounded-xl text-main group-hover:bg-main group-hover:text-white transition-all">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">
-                      {item.label}
-                    </p>
-                    <p className="text-main font-black text-sm">{item.val}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* 1. كروت التواصل (4 أعمدة) */}
+          <div className="lg:col-span-4 space-y-4" data-aos="fade-right">
+            {contactList.map((item, i) => (
+              <a
+                key={i}
+                href={item.link}
+                className="flex items-center gap-5 p-6 bg-white rounded-[2rem] border border-slate-100 hover:border-main/20 hover:shadow-xl hover:shadow-main/5 transition-all duration-300 group"
+              >
+                <div className="bg-stone-50 p-4 rounded-2xl text-main group-hover:bg-main group-hover:text-white transition-all duration-300">
+                  {item.icon}
+                </div>
+                <div>
+                  <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">
+                    {item.label}
+                  </p>
+                  <p className="text-main font-black text-base">{item.val}</p>
+                </div>
+              </a>
+            ))}
           </div>
 
-          {/* 2. الفورم */}
-          <div className="lg:w-2/3 w-full" data-aos="fade-right">
-            <div className="bg-stone-50 p-8 md:p-12 rounded-[3rem] border border-slate-100 shadow-sm">
+          {/* 2. فورم التواصل (8 أعمدة) */}
+          <div className="lg:col-span-8" data-aos="fade-left">
+            <div className="bg-white p-8 md:p-12 rounded-[3.5rem] shadow-sm border border-slate-50 relative overflow-hidden">
+              {/* لمسة فنية داخل الفورم */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-main/5 rounded-bl-full -z-0"></div>
+
               <form
                 onSubmit={handleSubmit}
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8"
               >
                 <input type="hidden" name="_captcha" value="false" />
                 <input
                   type="hidden"
                   name="_subject"
-                  value="طلب جديد من موقع Ravinala Landscape"
+                  value="New Inquiry - Ravinala Landscape"
                 />
 
-                <div className="space-y-2">
-                  <label className="text-sm font-black text-main mr-2 flex items-center gap-2">
-                    <User size={16} /> الاسم الكامل
+                <div className="space-y-3">
+                  <label className="text-xs font-black text-main/60 uppercase tracking-tighter mr-2 flex items-center gap-2">
+                    <User size={14} /> الاسم الكامل
                   </label>
                   <input
                     type="text"
                     name="name"
                     required
-                    placeholder="أدخل اسمك الكريم"
-                    className="form-input-custom"
+                    placeholder="محمد القاسم"
+                    className="modern-input"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-black text-main mr-2 flex items-center gap-2">
-                    <Mail size={16} /> البريد الإلكتروني
+                <div className="space-y-3">
+                  <label className="text-xs font-black text-main/60 uppercase tracking-tighter mr-2 flex items-center gap-2">
+                    <Mail size={14} /> البريد الإلكتروني
                   </label>
                   <input
                     type="email"
                     name="email"
                     required
-                    placeholder="example@mail.com"
-                    className="form-input-custom"
+                    placeholder="info@example.com"
+                    className="modern-input"
                   />
                 </div>
 
-                <div className="md:col-span-2 space-y-2">
-                  <label className="text-sm font-black text-main mr-2 flex items-center gap-2">
-                    <MessageDots size={16} /> تفاصيل المشروع أو الاستفسار
+                <div className="md:col-span-2 space-y-3">
+                  <label className="text-xs font-black text-main/60 uppercase tracking-tighter mr-2 flex items-center gap-2">
+                    <MessageDots size={14} /> كيف يمكننا مساعدتك؟
                   </label>
                   <textarea
                     name="message"
                     required
-                    rows={4}
-                    placeholder="اكتب لنا نبذة عن المساحة..."
-                    className="form-input-custom resize-none"
+                    rows={5}
+                    placeholder="أخبرنا عن مساحة حديقتك، أو الخدمة التي ترغب بها..."
+                    className="modern-input resize-none"
                   ></textarea>
                 </div>
 
@@ -196,15 +206,13 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={load}
-                    className={`w-full bg-main hover:bg-main-light text-white py-5 rounded-2xl font-black text-lg shadow-xl shadow-main/10 transition-all flex items-center justify-center gap-3 group ${
-                      load ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
-                    }`}
+                    className="w-full bg-main hover:bg-main-light text-white py-6 rounded-2xl font-black text-lg transition-all flex items-center justify-center gap-4 group shadow-2xl shadow-main/20 disabled:opacity-50"
                   >
-                    {load ? "جاري الإرسال..." : "إرسال الطلب الآن"}
+                    {load ? "جاري الإرسال..." : "أرسل رسالتك الآن"}
                     {!load && (
                       <Send
                         size={22}
-                        className="group-hover:-translate-x-1 group-hover:-translate-y-1 transition-transform rtl:group-hover:translate-x-1"
+                        className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
                       />
                     )}
                   </button>
@@ -216,20 +224,25 @@ export default function ContactSection() {
       </div>
 
       <style jsx>{`
-        .form-input-custom {
+        .modern-input {
           width: 100%;
-          padding: 1.2rem 1.5rem;
-          border-radius: 1.2rem;
-          border: 1px solid #e2e8f0;
-          background: white;
+          padding: 1.25rem 1.5rem;
+          border-radius: 1.25rem;
+          border: 1px solid #f1f5f9;
+          background: #f8fafc;
           outline: none;
           transition: all 0.3s ease;
-          font-weight: 500;
+          font-weight: 600;
+          color: #054a49;
         }
-        .form-input-custom:focus {
-          border-color: #054a49; /* يمكنك استبدالها بـ var(--color-main) إذا كنت معرفها في CSS */
-          box-shadow: 0 0 0 4px rgba(5, 74, 73, 0.05);
-          transform: translateY(-2px);
+        .modern-input:focus {
+          background: white;
+          border-color: #054a49;
+          box-shadow: 0 10px 20px -10px rgba(5, 74, 73, 0.1);
+        }
+        .modern-input::placeholder {
+          color: #cbd5e1;
+          font-weight: 400;
         }
       `}</style>
     </section>
